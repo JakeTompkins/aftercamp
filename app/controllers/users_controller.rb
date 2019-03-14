@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :authenticate_user, only: [:update, :destroy]
+    before_action :authenticate_user, only: [:update]
   def register
     @user = User.new(user_params)
 
@@ -10,24 +10,25 @@ class UsersController < ApplicationController
         when params[:employer] === 1
             employer = Employer.new(employer_params)
             @user.roleable = employer
+        else
+            render_error "User must have a type"
     end
 
-    if @user.save
-        render json: {status: 200, message: "User saved"}
-    else
-        @user.errors.each {|attribute, message| p "#{attribute}: #{message}"}
-        render json: {error: "User could not be created"}
-    end
+    @user.try_save
   end
 
   def update
-  end
-
-  def destroy
+    if current_user
+        current_user.update(user_params)
+        if current_user.is_grad?
+            current_user.roleable.update(grad_params)
+        else
+            current_user.roleable.update(employer_params)
+        end
+    end
   end
 
   private
-
     def user_params
         params.require(:user).permit(:email, :password, :password_confirmation)
     end
@@ -38,5 +39,9 @@ class UsersController < ApplicationController
 
     def employer_params
         params.require(:employer).permit(:industy, :company_name)
+    end
+
+    def render_error message
+        render json: {erro: message}
     end
 end

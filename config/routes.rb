@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   post 'users/register' => 'users#register'
 
-  get 'users/update'
-
-  get 'users/destroy'
+  put 'users/update'
 
   root to: 'pages#home'
 
