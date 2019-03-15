@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+    # Job routes
+  get 'jobs' => 'jobs#index'
+  get 'job/new' => 'jobs#new'
+  post 'job/create' => 'jobs#create'
+  get 'job/show/:id' => 'jobs#show'
+  post 'job/update/:id' => 'jobs#update'
+  delete 'job/destroy/:id' => 'jobs#destroy'
+
+  # User Routes
   post 'user_token' => 'user_token#create'
   post 'users/regist' => 'users#register'
   put 'users/update' => 'users#update'

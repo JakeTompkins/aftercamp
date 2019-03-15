@@ -14,7 +14,7 @@ class UsersController < ApplicationController
             render_error "User must have a type"
     end
 
-    @user.try_save
+    try_save @user
   end
 
   def update
@@ -39,9 +39,5 @@ class UsersController < ApplicationController
 
     def employer_params
         params.require(:employer).permit(:industy, :company_name)
-    end
-
-    def render_error message
-        render json: {erro: message}
     end
 end

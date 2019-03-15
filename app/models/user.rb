@@ -10,14 +10,9 @@ class User < ApplicationRecord
     }
   end
 
-    def try_save
-        if self.save
-            render json: {status: 200, message: "User saved"}
-        else
-            self.errors.each {|attribute, message| p "#{attribute}: #{message}"}
-            render_error "User could not be created"
-        end
-    end
+  def role
+    self.roleable
+  end
 
     def is_grad?
         self.roleable.class == Grad
