@@ -1,14 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
+import { Provider } from "react-redux";
+import { createStore, combineReducers } from "redux";
 
 const root = props => {
 	return <div />;
 };
 
+const reducers = combineReducers({});
+
+const store = createStore(reducers);
+
 document.addEventListener("DOMContentLoaded", () => {
 	ReactDOM.render(
-		<Root />,
+		<Provider store={store}>
+			<Root />
+		</Provider>,
 		document.body.appendChild(document.createElement("div"))
 	);
 });
