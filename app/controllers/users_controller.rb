@@ -14,7 +14,7 @@ class UsersController < ApplicationController
             render_error "User must have a type"
     end
 
-    try_save @user
+    @user.try_save
   end
 
   def update

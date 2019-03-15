@@ -12,7 +12,7 @@ class JobsController < ApplicationController
 
   def create
     @job = Job.new(job_params)
-    try_save @job
+    @job.try_save
   end
 
   def show
@@ -20,12 +20,11 @@ class JobsController < ApplicationController
   end
 
   def update
-    @job.update(job_params)
-    try_save @job
+    @job.try_update(job_params)
   end
 
   def destroy
-    try_destroy @job
+    @job.try_destroy
   end
 
   private
