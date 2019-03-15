@@ -7,7 +7,7 @@ class UsersController < ApplicationController
         when params[:grad]
             grad = Grad.new(grad_params)
             @user.roleable = grad
-        when params[:employer] === 1
+        when params[:employer]
             employer = Employer.new(employer_params)
             @user.roleable = employer
         else

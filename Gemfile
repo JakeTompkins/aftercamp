@@ -9,6 +9,7 @@ gem 'rails', '5.2.0'
 gem 'redis'
 gem 'knock'
 gem 'bcrypt'
+gem 'bootsnap'
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.6.1'
