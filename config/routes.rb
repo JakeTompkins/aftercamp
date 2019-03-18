@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
     # Job routes
   get 'jobs' => 'jobs#index'
-  get 'job/new' => 'jobs#new'
   post 'job/create' => 'jobs#create'
   get 'job/show/:id' => 'jobs#show'
   post 'job/update/:id' => 'jobs#update'
@@ -12,6 +11,9 @@ Rails.application.routes.draw do
   post 'users/regist' => 'users#register'
   put 'users/update' => 'users#update'
 
-#   Root
+#   React Routes
     root to: 'pages#home'
+    get '/register' => 'pages#home'
+    get '/login' => 'pages#home'
+    
 end

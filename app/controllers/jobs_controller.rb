@@ -1,13 +1,10 @@
 class JobsController < ApplicationController
     before_action :authenticate_user, only: [:create, :update, :delete]
-    before_action :get_job, only: [:show, :update, :delete]
+    before_action :get_job, only: [:update, :delete]
+
   def index
     @jobs = Job.all
     render_data @jobs.as_json
-  end
-
-  def new
-    @job = Job.new
   end
 
   def create
