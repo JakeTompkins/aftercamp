@@ -1,20 +1,39 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
 import { Provider } from "react-redux";
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import {
+	BrowserRouter as Router,
+	Route,
+	Redirect,
+	Switch
+} from "react-router-dom";
 
-const root = props => {
-	return <div />;
-};
+import LandingPage from "../components/landingPage";
+import RegistrationPage from "../containers/registrationForm";
 
-const reducers = combineReducers({});
+import reduxPromise from "redux-promise";
+const middlewares = applyMiddleware(reduxPromise);
 
-const store = createStore(reducers);
+import jobsReducer from "../reducers/jobsReducer";
+import { reducer as formReducer } from "redux-form";
+const reducers = combineReducers({
+	jobs: jobsReducer,
+	form: formReducer
+});
+
+const store = createStore(reducers, {}, middlewares);
 
 document.addEventListener("DOMContentLoaded", () => {
 	ReactDOM.render(
 		<Provider store={store}>
-			<Root />
+			<Router>
+				<Switch>
+					<Route path="/" component={LandingPage} />
+					<Route path="/register" component={RegistrationPage} />
+				</Switch>
+			</Router>
 		</Provider>,
 		document.body.appendChild(document.createElement("div"))
 	);
