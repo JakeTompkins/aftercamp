@@ -11,7 +11,8 @@ import {
 } from "react-router-dom";
 
 import LandingPage from "../components/landingPage";
-import RegistrationPage from "../containers/registrationForm";
+import RegistrationPage from "../containers/registrationPage";
+import LoginPage from "../containers/loginPage";
 
 import reduxPromise from "redux-promise";
 const middlewares = applyMiddleware(reduxPromise);
@@ -30,8 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		<Provider store={store}>
 			<Router>
 				<Switch>
-					<Route path="/" component={LandingPage} />
-					<Route path="/register" component={RegistrationPage} />
+					<Route exact path="/" component={LandingPage} />
+					<Route exact path="/register" component={RegistrationPage} />
+					<Route exact path="/login" component={LoginPage} />
 				</Switch>
 			</Router>
 		</Provider>,

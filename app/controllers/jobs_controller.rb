@@ -1,6 +1,8 @@
 class JobsController < ApplicationController
     before_action :authenticate_user, only: [:create, :update, :delete]
     before_action :get_job, only: [:update, :delete]
+    before_action :confirm_user_is_employer, only:[:create]
+    before_action :confirm_user_is_owner, only:[:update, :delete]
 
   def index
     @jobs = Job.all
@@ -9,7 +11,12 @@ class JobsController < ApplicationController
 
   def create
     @job = Job.new(job_params)
-    @job.try_save
+    @job.employer = current_user.roleable
+    if @job.save
+        render_data @job.as_json
+    else
+        render_error "Job could not be created"
+    end
   end
 
   def show
@@ -17,14 +24,30 @@ class JobsController < ApplicationController
   end
 
   def update
-    @job.try_update(job_params)
+    if @job.update(job_params)
+        render_data @job.as_json
+    else
+        render_error "Job could not be updated"
+    end
   end
 
   def destroy
-    @job.try_destroy
+    if @job.destroy
+        render_data "Job destroyed"
+    else
+        render_error "Job could not be destroyed"
+    end
   end
 
   private
+
+  def confirm_user_is_employer
+    render_error "Current user is not an employer" if !current_user.is_employer?
+  end
+
+  def confirm_user_is_owner
+    render_error "Current user does not own this job" if !current_user.roleable == @job.employer
+  end
 
   def get_job
     @job = Job.find(params[:id])

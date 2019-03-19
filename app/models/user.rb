@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  belongs_to :roleable, polymorphic: true
+  belongs_to :roleable, polymorphic: true, optional: true
   has_secure_password
   validates :email, presence: true
 
@@ -19,6 +19,6 @@ class User < ApplicationRecord
     end
 
     def is_employer?
-        self.roleable == Employer
+        self.roleable.class == Employer
     end
 end

@@ -10,6 +10,7 @@ gem 'redis'
 gem 'knock'
 gem 'bcrypt'
 gem 'bootsnap'
+gem 'rack-cors', require: 'rack/cors'
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.6.1'

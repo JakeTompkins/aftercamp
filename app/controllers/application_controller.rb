@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
 #   protect_from_forgery with: :exception
   include Knock::Authenticable
+
   def render_error message
     render json: {error: message}
   end

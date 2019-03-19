@@ -2,19 +2,12 @@ class UsersController < ApplicationController
     before_action :authenticate_user, only: [:update]
   def register
     @user = User.new(user_params)
-
-    case
-        when params[:grad]
-            grad = Grad.new(grad_params)
-            @user.roleable = grad
-        when params[:employer]
-            employer = Employer.new(employer_params)
-            @user.roleable = employer
-        else
-            render_error "User must have a type"
+    if @user.save
+        render_data @user.as_json
+    else
+        @user.errors.each {|error, message| p "#{error}: #{message}"}
+        render_error "User could not be saved"
     end
-
-    @user.try_save
   end
 
   def update
@@ -22,10 +15,25 @@ class UsersController < ApplicationController
         current_user.update(user_params)
         if current_user.is_grad?
             current_user.roleable.update(grad_params)
-        else
+        elsif current_user.is_employer?
             current_user.roleable.update(employer_params)
         end
+
+        if !current_user.role
+            case
+            when params[:grad]
+                g = Grad.new(grad_params)
+                current_user.roleable = g
+                current_user.save
+            when params[:employer]
+                e = Employer.new(employer_params)
+                current_user.roleable = e
+                current_user.save
+            end
+        end
     end
+
+    render_data "User updated successfully"
   end
 
   private
