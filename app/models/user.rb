@@ -14,6 +14,10 @@ class User < ApplicationRecord
     self.roleable
   end
 
+  def role= role
+    self.roleable = role
+  end
+
     def is_grad?
         self.roleable.class == Grad
     end
