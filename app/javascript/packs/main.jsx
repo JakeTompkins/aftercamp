@@ -13,9 +13,10 @@ import {
 import LandingPage from "../components/landingPage";
 import RegistrationPage from "../containers/registrationPage";
 import LoginPage from "../containers/loginPage";
+import JobsIndexPage from "../containers/jobsIndexPage";
 
 import reduxPromise from "redux-promise";
-const middlewares = applyMiddleware(reduxPromise);
+const middleware = applyMiddleware(reduxPromise);
 
 import jobsReducer from "../reducers/jobsReducer";
 import { reducer as formReducer } from "redux-form";
@@ -24,7 +25,7 @@ const reducers = combineReducers({
 	form: formReducer
 });
 
-const store = createStore(reducers, {}, middlewares);
+const store = createStore(reducers, {}, middleware);
 
 document.addEventListener("DOMContentLoaded", () => {
 	ReactDOM.render(
@@ -34,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					<Route exact path="/" component={LandingPage} />
 					<Route exact path="/register" component={RegistrationPage} />
 					<Route exact path="/login" component={LoginPage} />
+					<Route exact pat="/jobs" component={JobsIndexPage} />
 				</Switch>
 			</Router>
 		</Provider>,

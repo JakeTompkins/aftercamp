@@ -2,7 +2,7 @@ import axios from "axios";
 import * as Cookies from "js-cookie";
 
 const setConfig = () => {
-	token = Cookies.get("jwt");
+	const token = Cookies.get("jwt");
 	if (token) {
 		return { headers: { Authorization: `Bearer ${token}` } };
 	}
@@ -42,14 +42,14 @@ export const loginUser = data => {
 };
 
 export const getJobs = () => {
-	config = setConfig();
+	const config = setConfig();
 	if (!config) {
 		return null;
 	} else {
 		return axios
 			.get("/api/jobs", null, config)
 			.then(response => {
-				return response.data;
+				return response.data.data;
 			})
 			.catch(err => {
 				console.log(err);
@@ -58,14 +58,14 @@ export const getJobs = () => {
 };
 
 export const getJob = id => {
-	config = setConfig();
+	const config = setConfig();
 	if (!config) {
 		return null;
 	} else {
 		return axios
 			.get("/api/jobs/" + id, null, config)
 			.then(response => {
-				return response.data;
+				return response.data.data;
 			})
 			.catch(err => {
 				console.log(err);
@@ -74,7 +74,7 @@ export const getJob = id => {
 };
 
 export const createJob = data => {
-	config = setConfig();
+	const config = setConfig();
 	if (!config) {
 		return false;
 	} else {
@@ -82,7 +82,7 @@ export const createJob = data => {
 		return axios
 			.post("/api/jobs", payload, config)
 			.then(response => {
-				return response.data;
+				return response.data.data;
 			})
 			.catch(err => {
 				console.log(err);
@@ -91,7 +91,7 @@ export const createJob = data => {
 };
 
 export const updateJob = (id, data) => {
-	config = setConfig();
+	const config = setConfig();
 	if (!config) {
 		return false;
 	} else {
@@ -99,7 +99,7 @@ export const updateJob = (id, data) => {
 		return axios
 			.put("/api/jobs/" + id, payload, config)
 			.then(response => {
-				return response.data;
+				return response.data.data;
 			})
 			.catch(err => {
 				console.log(err);
@@ -108,14 +108,14 @@ export const updateJob = (id, data) => {
 };
 
 export const deleteJob = id => {
-	config = setConfig();
+	const config = setConfig();
 	if (!config) {
 		return false;
 	} else {
 		return axios
 			.delete("/api/jobs/" + id)
 			.then(response => {
-				return response.data;
+				return response.data.data;
 			})
 			.catch(err => {
 				console.log(err);

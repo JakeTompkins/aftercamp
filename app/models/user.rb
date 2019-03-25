@@ -5,8 +5,8 @@ class User < ApplicationRecord
 
   def to_token_payload
     {
-        sub: id,
-        email: email
+      sub: id,
+      email: email,
     }
   end
 
@@ -14,15 +14,15 @@ class User < ApplicationRecord
     self.roleable
   end
 
-  def role= role
+  def role=(role)
     self.roleable = role
   end
 
-    def is_grad?
-        self.roleable.class == Grad
-    end
+  def is_grad?
+    self.roleable.class == Grad
+  end
 
-    def is_employer?
-        self.roleable.class == Employer
-    end
+  def is_employer?
+    self.roleable.class == Employer
+  end
 end
