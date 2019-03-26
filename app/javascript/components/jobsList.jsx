@@ -8,7 +8,7 @@ class JobsList extends React.Component {
 			<div className="container">
 				<div className="row">
 					{this.props.jobs.map(job => {
-						return <JobCard job={job} />;
+						return <JobCard job={job} key={job.id} />;
 					})}
 				</div>
 			</div>

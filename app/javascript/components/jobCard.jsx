@@ -5,7 +5,7 @@ const JobCard = props => {
 		<div className="container col">
 			<div className="row">
 				<div className="col">
-					<h1>{job.role}</h1>
+					<h1>{props.job.role}</h1>
 				</div>
 			</div>
 		</div>
