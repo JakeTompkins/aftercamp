@@ -1,5 +1,5 @@
 export const SET_JOBS = "SET_JOBS";
-import axios from "axios";
+export const SET_JOB = "SET_JOB";
 import * as api from "../API/API";
 
 export const setJobs = () => {
@@ -7,6 +7,15 @@ export const setJobs = () => {
 
 	return {
 		type: SET_JOBS,
+		payload: promise
+	};
+};
+
+export const setJob = id => {
+	const promise = api.getJob(id);
+
+	return {
+		type: SET_JOB,
 		payload: promise
 	};
 };
