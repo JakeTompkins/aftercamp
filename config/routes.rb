@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   put "/api/jobs/:id" => "jobs#update"
   delete "/api/jobs/:id" => "jobs#destroy"
 
+  # Grad routes
+  get "/api/grads" => "users#index_grads"
+  get "/api/grads/:id" => "users#show_grad"
+  
+
   # User Routes
   post "user_token" => "user_token#create"
   post "users/register" => "users#register"
