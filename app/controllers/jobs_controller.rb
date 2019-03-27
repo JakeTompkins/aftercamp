@@ -1,8 +1,8 @@
 class JobsController < ApplicationController
-    before_action :authenticate_user, only: [:create, :update, :delete]
-    before_action :get_job, only: [:update, :delete]
-    before_action :confirm_user_is_employer, only:[:create]
-    before_action :confirm_user_is_owner, only:[:update, :delete]
+  before_action :authenticate_user, only: [:create, :update, :delete]
+  before_action :get_job, only: [:show, :update, :delete]
+  before_action :confirm_user_is_employer, only: [:create]
+  before_action :confirm_user_is_owner, only: [:update, :delete]
 
   def index
     @jobs = Job.all
@@ -13,9 +13,9 @@ class JobsController < ApplicationController
     @job = Job.new(job_params)
     @job.employer = current_user.roleable
     if @job.save
-        render_data @job.as_json
+      render_data @job.as_json
     else
-        render_error "Job could not be created"
+      render_error "Job could not be created"
     end
   end
 
@@ -25,17 +25,17 @@ class JobsController < ApplicationController
 
   def update
     if @job.update(job_params)
-        render_data @job.as_json
+      render_data @job.as_json
     else
-        render_error "Job could not be updated"
+      render_error "Job could not be updated"
     end
   end
 
   def destroy
     if @job.destroy
-        render_data "Job destroyed"
+      render_data "Job destroyed"
     else
-        render_error "Job could not be destroyed"
+      render_error "Job could not be destroyed"
     end
   end
 
