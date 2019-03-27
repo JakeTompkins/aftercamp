@@ -17,7 +17,8 @@ import JobsIndexPage from "../containers/jobsIndexPage";
 import JobsShowPage from "../containers/jobsShowPage";
 
 import reduxPromise from "redux-promise";
-const middleware = applyMiddleware(reduxPromise);
+import { composeWithDevTools } from "redux-devtools-extension";
+const middleware = composeWithDevTools()(applyMiddleware(reduxPromise));
 
 import jobsReducer from "../reducers/jobsReducer";
 import { reducer as formReducer } from "redux-form";
