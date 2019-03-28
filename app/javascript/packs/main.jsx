@@ -15,18 +15,20 @@ import RegistrationPage from "../containers/registrationPage";
 import LoginPage from "../containers/loginPage";
 import JobsIndexPage from "../containers/jobsIndexPage";
 import JobsShowPage from "../containers/jobsShowPage";
+import GradsIndexPage from "../containers/gradsIndexPage";
 
 import reduxPromise from "redux-promise";
-import { composeWithDevTools } from "redux-devtools-extension";
-const middleware = composeWithDevTools()(applyMiddleware(reduxPromise));
+const middleware = applyMiddleware(reduxPromise);
 
 import jobsReducer from "../reducers/jobsReducer";
 import { reducer as formReducer } from "redux-form";
 import jobReducer from "../reducers/jobReducer";
+import gradsReducer from "../reducers/gradsReducer";
 const reducers = combineReducers({
 	jobs: jobsReducer,
 	form: formReducer,
-	job: jobReducer
+	job: jobReducer,
+	grads: gradsReducer
 });
 
 const store = createStore(reducers, {}, middleware);
@@ -41,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					<Route exact path="/login" component={LoginPage} />
 					<Route exact path="/jobs" component={JobsIndexPage} />
 					<Route exact path="/jobs/:id" component={JobsShowPage} />
+					<Route exact path="/grads" component={GradsIndexPage} />
 				</Switch>
 			</Router>
 		</Provider>,

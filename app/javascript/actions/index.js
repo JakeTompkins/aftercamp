@@ -1,5 +1,6 @@
 export const SET_JOBS = "SET_JOBS";
 export const SET_JOB = "SET_JOB";
+export const SET_GRADS = "SET_GRADS";
 import * as api from "../API/API";
 
 export const setJobs = () => {
@@ -16,6 +17,15 @@ export const setJob = id => {
 
 	return {
 		type: SET_JOB,
+		payload: promise
+	};
+};
+
+export const setGrads = () => {
+	const promise = api.getGrads();
+
+	return {
+		type: SET_GRADS,
 		payload: promise
 	};
 };

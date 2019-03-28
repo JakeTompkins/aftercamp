@@ -122,3 +122,19 @@ export const deleteJob = id => {
 			});
 	}
 };
+
+export const getGrads = () => {
+	const config = setConfig();
+	if (!config) {
+		return false;
+	} else {
+		return axios
+			.get("/api/grads")
+			.then(response => {
+				return response.data.data;
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	}
+};

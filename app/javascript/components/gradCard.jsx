@@ -14,3 +14,5 @@ const GradCard = props => {
 		</div>
 	);
 };
+
+export default GradCard;
