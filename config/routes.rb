@@ -22,4 +22,5 @@ Rails.application.routes.draw do
   get "/login" => "pages#home"
   get "/jobs" => "pages#home"
   get "/jobs/:id" => "pages#home"
+  get "/grads" => "pages#home"
 end
