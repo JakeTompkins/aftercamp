@@ -16,6 +16,15 @@ class RegistrationForm extends React.Component {
 				<div className="row">
 					<div className="col-sm-12">
 						<div className="form-group">
+							<label htmlFor="name">Name</label>
+							<Field
+								className="form-control"
+								name="name"
+								component="input"
+								type="text"
+							/>
+						</div>
+						<div className="form-group">
 							<label htmlFor="email">Email</label>
 							<Field
 								className="form-control"
