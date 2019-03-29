@@ -9,7 +9,10 @@ import { setUser } from "../actions";
 
 class LoginPage extends React.Component {
 	submit = values => {
-		this.props.setUser(loginUser(values));
+		loginUser(values).then(user => {
+			console.log(user);
+			setUser(user);
+		});
 	};
 
 	render() {
@@ -17,7 +20,7 @@ class LoginPage extends React.Component {
 	}
 }
 
-mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => {
 	return bindActionCreators(
 		{
 			setUser: setUser

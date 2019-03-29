@@ -1,4 +1,4 @@
-import SET_USER from "../actions";
+import { SET_USER } from "../actions";
 
 export default (state, action) => {
 	if (state === undefined) {
@@ -15,7 +15,9 @@ export default (state, action) => {
 				suppInfo = action.payload.employer;
 			}
 
-			return { ...action.payload.user, ...suppInfo };
+			const user = { ...action.payload.user, ...suppInfo };
+
+			return user;
 
 		default:
 			return state;

@@ -25,4 +25,11 @@ class User < ApplicationRecord
   def is_employer?
     self.roleable.class == Employer
   end
+
+  def as_json_extended
+    hash = {}
+    hash[:user] = self
+    hash[self.roleable_type.to_sym] = self.role
+    hash
+  end
 end

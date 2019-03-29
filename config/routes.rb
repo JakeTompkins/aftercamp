@@ -12,9 +12,10 @@ Rails.application.routes.draw do
   
 
   # User Routes
-  post "user_token" => "user_token#create"
-  post "users/register" => "users#register"
-  put "users/update" => "users#update"
+  get "/user" => "users#return_current_user"
+  post "/user_token" => "user_token#create"
+  post "/users/register" => "users#register"
+  put "/users/update" => "users#update"
 
   #   React Routes
   root to: "pages#home"

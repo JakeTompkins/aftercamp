@@ -1,5 +1,16 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user, only: [:update]
+  before_action :authenticate_user, only: [:update, :return_current_user]
+
+  def return_current_user
+    @user = current_user
+    if @user
+      p "----------------------User verified!!"
+      render_data @user.as_json_extended
+    else
+      p "--------------------------User not verified!!!!"
+      render_error "User not logged in"
+    end
+  end
 
   def register
     @user = User.new(user_params)
@@ -12,24 +23,25 @@ class UsersController < ApplicationController
   end
 
   def update
-    if current_user
-      current_user.update(user_params)
-      if current_user.is_grad?
-        current_user.roleable.update(grad_params)
-      elsif current_user.is_employer?
-        current_user.roleable.update(employer_params)
+    @user = current_user
+    if @user
+      @user.update(user_params)
+      if @user.is_grad?
+        @user.roleable.update(grad_params)
+      elsif @user.is_employer?
+        @user.roleable.update(employer_params)
       end
 
-      if !current_user.role
+      if !@user.role
         case
         when params[:grad]
           g = Grad.new(grad_params)
-          current_user.roleable = g
-          current_user.save
+          @user.roleable = g
+          @user.save
         when params[:employer]
           e = Employer.new(employer_params)
-          current_user.roleable = e
-          current_user.save
+          @user.roleable = e
+          @user.save
         end
       end
     end
