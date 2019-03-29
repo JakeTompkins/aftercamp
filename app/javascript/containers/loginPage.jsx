@@ -1,11 +1,15 @@
 import React, { Component } from "react";
-import registrationForm from "../components/registrationForm";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
 import LoginForm from "../components/loginForm";
 import { loginUser } from "../API/API";
 
+import { setUser } from "../actions";
+
 class LoginPage extends React.Component {
 	submit = values => {
-		loginUser(values);
+		this.props.setUser(loginUser(values));
 	};
 
 	render() {
@@ -13,4 +17,16 @@ class LoginPage extends React.Component {
 	}
 }
 
-export default LoginPage;
+mapDispatchToProps = dispatch => {
+	return bindActionCreators(
+		{
+			setUser: setUser
+		},
+		dispatch
+	);
+};
+
+export default connect(
+	null,
+	mapDispatchToProps
+)(LoginPage);

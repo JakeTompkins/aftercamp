@@ -24,11 +24,13 @@ import jobsReducer from "../reducers/jobsReducer";
 import { reducer as formReducer } from "redux-form";
 import jobReducer from "../reducers/jobReducer";
 import gradsReducer from "../reducers/gradsReducer";
+import userReducer from "../reducers/userReducer";
 const reducers = combineReducers({
 	jobs: jobsReducer,
 	form: formReducer,
 	job: jobReducer,
-	grads: gradsReducer
+	grads: gradsReducer,
+	user: userReducer
 });
 
 const store = createStore(reducers, {}, middleware);
