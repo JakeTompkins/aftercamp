@@ -22,10 +22,12 @@ export const setJob = id => {
 	};
 };
 
-export const setUser = user => {
+export const setUser = () => {
+	const promise = api.getUser;
+
 	return {
 		type: SET_USER,
-		payload: user
+		payload: promise
 	};
 };
 

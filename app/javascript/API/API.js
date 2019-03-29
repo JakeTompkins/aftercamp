@@ -39,13 +39,6 @@ export const loginUser = data => {
 		})
 		.then(token => {
 			Cookies.set("jwt", token, { expires: 14 });
-			getUser().then(res => {
-				console.log(res);
-				return res;
-			});
-		})
-		.then(res => {
-			return res;
 		})
 		.catch(err => {
 			console.log(err);

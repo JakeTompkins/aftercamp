@@ -9,10 +9,7 @@ import { setUser } from "../actions";
 
 class LoginPage extends React.Component {
 	submit = values => {
-		loginUser(values).then(user => {
-			console.log(user);
-			setUser(user);
-		});
+		loginUser(values);
 	};
 
 	render() {
